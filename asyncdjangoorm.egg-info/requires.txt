@@ -1,0 +1,10 @@
+SQLAlchemy>=2.0
+aiogram>=3.0
+
+[mysql]
+aiomysql
+
+[postgres]
+asyncpg
+
+[sqlite]

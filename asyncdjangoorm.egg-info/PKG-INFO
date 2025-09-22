@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: asyncdjangoorm
+Version: 0.1.0
+Requires-Python: >=3.12
+Requires-Dist: SQLAlchemy>=2.0
+Requires-Dist: aiogram>=3.0
+Provides-Extra: postgres
+Requires-Dist: asyncpg; extra == "postgres"
+Provides-Extra: mysql
+Requires-Dist: aiomysql; extra == "mysql"
+Provides-Extra: sqlite
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
