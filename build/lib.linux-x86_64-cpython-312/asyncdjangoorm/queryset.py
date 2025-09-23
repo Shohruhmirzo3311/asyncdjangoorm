@@ -1,5 +1,5 @@
 import sqlalchemy
-from asyncdjangoorm.init_tables import AsyncSessionLocal
+from asyncdjangoorm._internal.init_tables import AsyncSessionLocal
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql import operators
 from sqlalchemy import func, and_

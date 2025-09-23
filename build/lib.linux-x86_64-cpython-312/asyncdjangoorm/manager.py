@@ -1,4 +1,4 @@
-from asyncdjangoorm.queryset import Queryset
+from asyncdjangoorm._internal.queryset import Queryset
 
 
 

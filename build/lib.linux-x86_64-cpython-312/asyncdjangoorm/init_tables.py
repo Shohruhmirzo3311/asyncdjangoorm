@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import (
     async_sessionmaker,
     create_async_engine
 )
-from asyncdjangoorm.base import Base
+from asyncdjangoorm._internal.base import Base
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 

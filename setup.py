@@ -7,14 +7,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 ext_modules = cythonize([
-    Extension("asyncdjangoorm.queryset", ["asyncdjangoorm/queryset.py"]),
-    Extension("asyncdjangoorm.manager", ["asyncdjangoorm/manager.py"]),
+    Extension("asyncdjangoorm.queryset", ["asyncdjangoorm/_internal/queryset.py"]),
+    Extension("asyncdjangoorm.manager", ["asyncdjangoorm/_internal/manager.py"]),
 ], compiler_directives={'language_level': "3"}, annotate=True)
 
 setup(
     name="asyncdjangoorm",
     version="0.1.2",
-    packages=find_packages(),
+    packages=find_packages(exclude=["_internal", "tests*"]),
     license="MIT",
     author="Shohruhmirzo",
     author_email="jamoliddinovshohruh1@gmail.com",

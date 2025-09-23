@@ -1,4 +1,4 @@
-# Python
+# Python bytecode
 __pycache__/
 *.pyc
 *.pyo
@@ -13,23 +13,18 @@ venv/
 build/
 dist/
 *.egg-info/
-*.so
-*.c
-*.o
-
-
 
 # Compiled extensions
 *.so
 *.c
+*.o
 
-# Local dev
-env/
+# Local development
 *.db
-__pycache__/
+.env/
+_internal/
 
-
-# IDE/editor configs
+# IDE / editor configs
 .idea/
 .vscode/
 *.swp
