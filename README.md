@@ -68,22 +68,16 @@ from config import BOT_TOKEN
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-# Optional: set commands in Telegram menu
-
 async def set_commands(bot: Bot):
 await bot.set_my_commands([
 BotCommand(command="create", description="Create a new item"),
 BotCommand(command="list", description="List all items")
 ])
 
-# Startup callback to initialize database and bot commands
-
 async def on_startup():
 await init_db() # Initialize all tables
 await set_commands(bot)
 print("Bot is ready and database initialized!")
-
-# Example command handlers
 
 @dp.message(commands=["create"])
 async def cmd_create(message):
@@ -108,8 +102,6 @@ class MyModel(TimeStampedModel):
 id = Column(Integer, primary_key=True)
 name = Column(String, unique=True)
 value = Column(Integer)
-
-# Attach async manager
 
 MyModel.objects = AsyncManager(MyModel)
 
