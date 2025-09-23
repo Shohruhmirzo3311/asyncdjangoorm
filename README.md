@@ -1,21 +1,24 @@
 # AsyncDjangoORM
 
-**AsyncDjangoORM** is an asynchronous ORM inspired by Django's ORM, built on top of SQLAlchemy.  
-It provides Django-like Querysets and Managers, allowing you to work with SQL databases using Python `async/await`. Perfect for async frameworks like **aiogram**, **FastAPI**, or **Starlette**.
+**AsyncDjangoORM** is an asynchronous ORM inspired by Django's ORM, built on top of SQLAlchemy. It provides Django-like Querysets and AsyncManagers, allowing you to interact with databases using Python async/await.
 
----
+## Ideal for async frameworks like **aiogram**, **FastAPI**, or **Starlette**.
 
 ## Features
 
-- Asynchronous database operations with `async/await`.
-- Django-style `Queryset` and `AsyncManager`.
-- Filter, exclude, order, annotate, aggregate, and bulk operations.
-- `get`, `create`, `get_or_create`, `update_or_create`.
-- `select_related` and `prefetch_related` for relational queries.
-- Supports PostgreSQL, MySQL, and SQLite.
-- Works seamlessly in async Python projects.
+Full async support using async/await.
 
----
+Django-style Queryset and AsyncManager.
+
+CRUD operations: get, create, get_or_create, update_or_create.
+
+Query methods: filter, exclude, order_by, annotate, aggregate, bulk_create, bulk_update, bulk_delete.
+
+Relation handling: select_related and prefetch_related.
+
+Supports PostgreSQL, MySQL, and SQLite.
+
+## Lightweight, flexible, and easy to integrate.
 
 ## Installation
 
@@ -35,9 +38,11 @@ pip install asyncdjangoorm[mysql]
 pip install asyncdjangoorm[sqlite]
 ```
 
-# Default: SQLite (works everywhere, no setup required)
+Database Configuration
 
-DATABASE_URL = "sqlite+aiosqlite:///./asyncdjangoorm.db"
+# SQLite (default)
+
+export DATABASE_URL="sqlite+aiosqlite:///./mydb.db"
 
 # PostgreSQL (asyncpg)
 
@@ -47,6 +52,18 @@ export DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/mydb"
 
 export DATABASE_URL="mysql+aiomysql://user:password@localhost:3306/mydb"
 
-# SQLite (aiosqlite)
+from asyncdjangoorm import AsyncManager
+from your_models import MyModel # import your models
 
-export DATABASE_URL="sqlite+aiosqlite:///./mydb.db"
+async def main(): # Fetch all objects asynchronously
+objects = await MyModel.objects.all()
+print(objects)
+
+    # Create a new object
+    await MyModel.objects.create(name="Test", value=42)
+
+    # Get or create an object
+    obj, created = await MyModel.objects.get_or_create(name="Example")
+
+    # Filter objects
+    filtered = await MyModel.objects.filter(value__gt=10)
