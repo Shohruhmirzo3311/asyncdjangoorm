@@ -1,2 +1,3 @@
-import asyncdjangoorm._internal.init_tables as it
+import asyncdjangoorm.config.init_tables as it
 print(dir(it))
+
