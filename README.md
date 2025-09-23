@@ -186,6 +186,6 @@ if __name__ == "__main__":
 ## 6️⃣ Notes
 
 - `AsyncManager` allows **async CRUD operations**, filtering, ordering, and annotations.
-- `_internal` logic is hidden; you only use the public API.
+
 - Compatible with **all Python 3 versions** and **aiogram 2.x and 3.x**.
 - You can attach `AsyncManager` to any SQLAlchemy model.
