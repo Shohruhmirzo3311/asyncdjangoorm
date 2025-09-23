@@ -2,7 +2,7 @@
 
 **AsyncDjangoORM** is an asynchronous ORM inspired by Django's ORM, built on top of SQLAlchemy. It provides Django-like Querysets and AsyncManagers, allowing you to interact with databases using Python async/await.
 
-## Ideal for async frameworks like **aiogram**, **FastAPI**, or **Starlette**.
+## Ideal for telegram bots while building application with like **aiogram**
 
 ## Features
 
