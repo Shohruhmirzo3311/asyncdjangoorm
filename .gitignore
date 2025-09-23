@@ -15,12 +15,12 @@ dist/
 *.egg-info/
 
 # Compiled extensions
-*.html
 *.so
 *.c
 *.o
+*.html  # if generated during builds
 
-# Local development
+# Local development / databases
 *.db
 .env/
 _internal/
@@ -29,5 +29,3 @@ _internal/
 .idea/
 .vscode/
 *.swp
-
-
