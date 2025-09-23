@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+env/
+venv/
+.venv/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.so
+*.c
+*.o
+
+# IDE/editor configs
+.idea/
+.vscode/
+*.swp
