@@ -1,0 +1,30 @@
+name: Build Wheels
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11, 3.12]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install cibuildwheel
+        run: pip install cibuildwheel==2.14.0
+      - name: Build wheels
+        run: cibuildwheel --output-dir wheelhouse
+      - name: Upload wheels (optional)
+        uses: actions/upload-artifact@v3
+        with:
+          name: wheels
+          path: wheelhouse/
