@@ -1,9 +1,12 @@
 import asyncio
+
 import sqlalchemy as sa
-from asyncdjangoorm.config.base import Base
+
 from asyncdjangoorm._internal.manager import AsyncManager
-from asyncdjangoorm._internal.queryset import Q, F
+from asyncdjangoorm._internal.queryset import F, Q
+from asyncdjangoorm.config.base import Base
 from asyncdjangoorm.config.init_tables import init_db
+
 
 # Define a model
 class User(Base):

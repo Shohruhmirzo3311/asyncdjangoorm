@@ -42,94 +42,116 @@ Database Configuration
 
 # SQLite (default)
 
+```
 export DATABASE_URL="sqlite+aiosqlite:///./mydb.db"
+```
 
 # PostgreSQL (asyncpg)
 
+```
 export DATABASE_URL="postgresql+asyncpg://user:password@localhost:5432/mydb"
+```
 
 # MySQL (aiomysql)
 
+```
 export DATABASE_URL="mysql+aiomysql://user:password@localhost:3306/mydb"
+```
 
-Getting Started
+# Getting Started with `asyncdjangoorm`
 
-1. Initialize the Database
+`asyncdjangoorm` is an asynchronous ORM inspired by Django, built on top of SQLAlchemy. It integrates easily with `aiogram` for Telegram bots.
 
-Before interacting with models, initialize your database tables. This ensures all models are properly created.
+---
 
-import asyncio
-from aiogram import Bot, Dispatcher
-from aiogram.types import BotCommand
-from asyncdjangoorm import init_db
-from models import MyModel
-from config import BOT_TOKEN
+## 1️⃣ Install the package
 
-bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
+```bash
+pip install asyncdjangoorm
 
-async def set_commands(bot: Bot):
-await bot.set_my_commands([
-BotCommand(command="create", description="Create a new item"),
-BotCommand(command="list", description="List all items")
-])
+```
 
-async def on_startup():
-await init_db() # Initialize all tables
-await set_commands(bot)
-print("Bot is ready and database initialized!")
+---
 
-@dp.message(commands=["create"])
-async def cmd_create(message):
-await MyModel.objects.create(name="FromBot", value=99)
-await message.answer("Item created!")
+## 2️⃣ Define Models
 
-@dp.message(commands=["list"])
-async def cmd_list(message):
-items = await MyModel.objects.all()
-text = "\n".join(f"{item.id}: {item.name} = {item.value}" for item in items) or "No items found."
-await message.answer(text)
+You can define your models using SQLAlchemy and attach `AsyncManager` for async operations.
 
-if **name** == "**main**":
-dp.run_polling(bot, on_startup=on_startup)
-
-2. Define Models
-   from sqlalchemy import Column, Integer, String
-   from asyncdjangoorm import TimeStampedModel, AsyncManager
+```python
+# models.py
+from sqlalchemy import Column, Integer, String
+from asyncdjangoorm import TimeStampedModel, AsyncManager
 
 class MyModel(TimeStampedModel):
-**tablename** = "my_model"
-id = Column(Integer, primary_key=True)
-name = Column(String, unique=True)
-value = Column(Integer)
+    __tablename__ = "my_model"
+    id = Column(Integer, primary_key=True)
+    name = Column(String, unique=True)
+    value = Column(Integer)
 
+# Attach AsyncManager
 MyModel.objects = AsyncManager(MyModel)
+```
 
-3. Using the ORM
+> `TimeStampedModel` automatically adds `created_at` and `updated_at` fields.
 
+---
+
+## 3️⃣ Initialize the Database
+
+Before using your models, initialize all tables:
+
+```python
+# init_db_example.py
+import asyncio
+from asyncdjangoorm import init_db
+from models import MyModel
+
+async def main():
+    await init_db()  # Create all tables
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+---
+
+## 4️⃣ Using the ORM
+
+Basic usage examples:
+
+```python
+# usage_example.py
 import asyncio
 from models import MyModel
 
-async def main(): # Fetch all objects
-objects = await MyModel.objects.all()
-print(objects)
-
+async def main():
     # Create a new object
     await MyModel.objects.create(name="Test", value=42)
 
-    # Get or create an object
-    obj, created = await MyModel.objects.get_or_create(name="Example")
-    print(obj, created)
+    # Fetch all objects
+    items = await MyModel.objects.all()
+    print(items)
 
     # Filter objects
     filtered = await MyModel.objects.filter(value__gt=10)
     print(filtered)
 
-if **name** == "**main**":
-asyncio.run(main())
+    # Get or create an object
+    obj, created = await MyModel.objects.get_or_create(name="Example")
+    print(obj, "Created:", created)
 
-4. Integration with AIogram
+if __name__ == "__main__":
+    asyncio.run(main())
+```
 
+---
+
+## 5️⃣ Integrating with aiogram
+
+Example Telegram bot using `asyncdjangoorm`:
+
+```python
+# bot_example.py
 import asyncio
 from aiogram import Bot, Dispatcher, types
 from asyncdjangoorm import init_db
@@ -141,19 +163,29 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 async def on_startup():
-await init_db() # Make sure tables exist
+    await init_db()  # Initialize tables
 
 @dp.message_handler(commands=["create"])
 async def create_item(message: types.Message):
-await MyModel.objects.create(name="FromBot", value=99)
-await message.answer("Item created!")
+    await MyModel.objects.create(name="FromBot", value=99)
+    await message.answer("Item created!")
 
 @dp.message_handler(commands=["list"])
 async def list_items(message: types.Message):
-items = await MyModel.objects.all()
-text = "\n".join(f"{item.id}: {item.name} = {item.value}" for item in items)
-await message.answer(text)
+    items = await MyModel.objects.all()
+    text = "\n".join(f"{item.id}: {item.name} = {item.value}" for item in items) or "No items found."
+    await message.answer(text)
 
-if **name** == "**main**":
-asyncio.run(on_startup())
-dp.run_polling(bot)
+if __name__ == "__main__":
+    asyncio.run(on_startup())
+    dp.run_polling(bot)
+```
+
+---
+
+## 6️⃣ Notes
+
+- `AsyncManager` allows **async CRUD operations**, filtering, ordering, and annotations.
+- `_internal` logic is hidden; you only use the public API.
+- Compatible with **all Python 3 versions** and **aiogram 2.x and 3.x**.
+- You can attach `AsyncManager` to any SQLAlchemy model.
