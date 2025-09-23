@@ -15,6 +15,7 @@ dist/
 *.egg-info/
 
 # Compiled extensions
+*.html
 *.so
 *.c
 *.o
@@ -28,3 +29,5 @@ _internal/
 .idea/
 .vscode/
 *.swp
+
+
