@@ -17,6 +17,18 @@ dist/
 *.c
 *.o
 
+
+
+# Compiled extensions
+*.so
+*.c
+
+# Local dev
+env/
+*.db
+__pycache__/
+
+
 # IDE/editor configs
 .idea/
 .vscode/
