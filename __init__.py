@@ -1,1 +1,1 @@
-from . import asyncdjangoorm
+from . import asyncdjangoorm, setup
