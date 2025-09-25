@@ -1,0 +1,1 @@
+recursive-include asyncdjangoorm/project_template *

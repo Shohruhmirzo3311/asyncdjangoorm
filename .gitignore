@@ -24,6 +24,12 @@ dist/
 *.db
 .env/
 _internal/
+cli
+main
+utils/
+project_template/
+migrations/
+MANIFEST
 
 # IDE / editor configs
 .idea/

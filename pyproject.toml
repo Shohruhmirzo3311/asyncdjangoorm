@@ -4,3 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [tool.cibuildwheel]
 build = "cp312-*"
+
+[project]
+name = "asyncdjangoorm"
+version = "0.1.5"
+description = "An asynchronous ORM inspired by Django's ORM, built on top of SQLAlchemy."
+readme = "README.md"
+requires-python = ">=3.7"
+license = { text = "MIT" }
+authors = [{ name = "Shohruhmirzo", email = "jamoliddinovshoh1@gmail.com" }]
+dependencies = [
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "aiogram>=2.25,<4.0",
+]
+
+[project.scripts]
+asyncdjangoorm-admin = "asyncdjangoorm.main:main"
+
+[tool.setuptools]
+include-package-data = true
+
+
+[tool.setuptools.package-data]
+asyncdjangoorm = ["project_template/**/*"]
