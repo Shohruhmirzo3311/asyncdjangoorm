@@ -7,7 +7,7 @@ build = "cp312-*"
 
 [project]
 name = "asyncdjangoorm"
-version = "0.2.9"
+version = "0.3.0"
 description = "An asynchronous ORM inspired by Django's ORM, built on top of SQLAlchemy."
 readme = "README.md"
 requires-python = ">=3.7"
