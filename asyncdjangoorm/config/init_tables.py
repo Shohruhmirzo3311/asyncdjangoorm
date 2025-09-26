@@ -19,7 +19,7 @@ def _normalize_db_url(db_url: str) -> str:
     if url.drivername.startswith("sqlite+aiosqlite"):
         url = url.set(drivername="sqlite+aiosqlite")
     elif url.drivername.startswith("postgresql+asyncpg"):
-        url = url.set(drivername="postgresql+asyncpg")
+        url = url.set(drivername="postgresql+psycopg2")
     elif url.drivername.startswith("mysql+aiomysql"):
         url = url.set(drivername="mysql+aiomysql")
 

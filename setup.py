@@ -18,8 +18,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="asyncdjangoorm",
-    version="0.1.6",
-    packages=find_packages(exclude=["tests*", "asyncdjangoorm._internal*"]),
+    version="0.2.0",
     entry_points={
         "console_scripts": [
             "asyncdjangoorm-admin=asyncdjangoorm.__main__:main",
