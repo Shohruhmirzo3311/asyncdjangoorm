@@ -18,8 +18,10 @@ DB_CHOICES = {
         "extra": "sqlite",
     },
     "postgres": {
-        "driver": "postgresql+asyncpg",
-        "url_template": "postgresql+asyncpg://{user}:{password}@{host}:{port}/{db}",
+        "driver_sync": "postgresql+psycopg2",
+        "driver_async": "postgresql+asyncpg",
+        "url_template_sync": "postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}",
+        "url_template_async": "postgresql+asyncpg://{user}:{password}@{host}:{port}/{db}",
         "extra": "postgres",
     },
     "mysql": {
